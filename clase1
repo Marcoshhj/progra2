@@ -1,0 +1,36 @@
+import java.util.Iterator;
+public class practica {
+
+	public static void main(String[] args) {
+		int[][] matriz = {{	1,2,3},
+				{4,5,6},
+				{7,8,9}};
+		System.out.println(sumaPorColumna(matriz)[1]);
+		}
+	public static int[] sumaPorColumna(int[][] mat){
+		int [] suma= new int [mat[0].length];
+		for(int columna =0 ; columna<mat[0].length; columna++) {
+			for(int fila =0 ; fila<mat.length;fila++) {
+				suma[columna]+= mat[fila][columna];
+			}
+		}
+		return suma;
+	}
+	public static Boolean filasCrecientes(int[][] mat) {
+		boolean creciente= true;
+		for (int fila=0; fila < mat.length; fila++){
+			creciente=creciente&&esCreciente(mat[fila]);
+				
+			}
+			
+		return creciente;
+	}
+	private static boolean esCreciente(int[] vector) {
+		boolean esCreciente=true;
+		for(int i=0; i<vector.length-1;i++) {
+			esCreciente=esCreciente&& vector[i]<vector[i+1];
+		}
+		return esCreciente;
+	}
+	
+}
