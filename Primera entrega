@@ -1,0 +1,117 @@
+package acumuladores;
+
+
+
+
+public class Acumuladores {
+	public boolean todosMultiplosEnAlgunaFila(int[][] mat, int num) {
+	    boolean existeFila = false; 
+	    
+	    for (int fila = 0; fila < mat.length; fila++) {
+	        existeFila = existeFila || (num > 0 && todosSonMultiplos(mat[fila], num));
+	    }
+	    
+	    return existeFila;
+	}
+
+	
+	private boolean todosSonMultiplos(int[] vectorFila, int num) {
+	    boolean todosM = true; 
+	    
+	    for (int columna = 0; columna < vectorFila.length; columna++) {
+	        todosM = todosM && (vectorFila[columna] % num == 0);
+	    }
+	    
+	    return todosM;
+	}
+
+	
+	
+	
+	public boolean hayInterseccionPorFila(int[][] mat, int[][] mat2) {
+	   
+	    boolean hayInter = (mat.length > 0 && mat.length == mat2.length);
+	    
+	    for (int fila = 0; fila < mat.length; fila++) {
+	        hayInter = hayInter && (tienenComun(mat[fila], mat2[fila]));
+	    }
+	    return hayInter;
+	}
+
+	
+	
+	private boolean tienenComun(int[] filaA, int[] filaB) {
+	    boolean igual = false; 
+	    
+	    for (int valor = 0; valor < filaA.length; valor++) {
+	        for (int valor2 = 0; valor2 < filaB.length; valor2++) {
+	            igual = igual || (filaA[valor] == filaB[valor2]);
+	        }
+	    }
+	    return igual;
+	}
+	
+	
+	
+	
+	
+	
+	public boolean algunaFilaSumaMasQueLaColumna(int[][] mat, int nColum) {
+	    
+	    boolean esValido = (mat.length > 0) && (nColum >= 0) && (nColum < mat[0].length);
+	    
+	    boolean existeFilaMayor = false;
+	    
+	    for (int fila = 0; fila < mat.length && esValido; fila++) {
+	        existeFilaMayor = existeFilaMayor || (obtenerSumaFila(mat[fila]) > obtenerSumaColumna(mat, nColum));
+	    }
+	    
+	    return esValido && existeFilaMayor;
+	}
+		
+	
+	
+	private int obtenerSumaFila(int[] fila) {
+	    int suma = 0;
+	    for (int posicion = 0; posicion< fila.length; posicion++) {
+	        suma = suma + fila[posicion];
+	    }
+	    return suma;
+	}
+
+	
+	private int obtenerSumaColumna(int[][] mat, int nColum) {
+	    int suma = 0;
+	    for (int fila = 0; fila < mat.length; fila++) {
+	        suma = suma + mat[fila][nColum];
+	    }
+	    return suma;
+	}
+	
+	
+	
+	
+	
+	public boolean hayInterseccionPorColumna(int[][] mat, int[][] mat2) {
+		boolean valido = (mat.length > 0) && (mat2.length > 0)&& (mat[0].length == mat2[0].length);
+		boolean esValido=true;
+		for (int fila = 0; fila < mat.length; fila++) {
+			esValido= esValido&& (compararColum(mat,fila,mat2));
+		}
+		return valido && esValido;
+	}
+
+
+	private boolean compararColum(int [][]mat,int col,int [][]mat2) {
+		boolean hay=false;
+		for (int fila0 = 0; fila0 < mat.length; fila0++) {
+			for (int fila1 = 0; fila1 < mat2.length; fila1++) {
+				hay= hay ||(mat[fila0][col]==mat2[fila1][col]) ;
+			}
+			
+		}
+		return hay;
+	}
+	
+	
+}
